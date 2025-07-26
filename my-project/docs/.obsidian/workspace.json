@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "d40e46643f05e0c2",
+    "type": "split",
+    "children": [
+      {
+        "id": "4b78dab311b3c448",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "87e5d30e6fbaa4f5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/littletrick/powerbi/Power BI制作GDP动态排行榜详细教程.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Power BI制作GDP动态排行榜详细教程"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6db8b19d10acd426",
+    "type": "split",
+    "children": [
+      {
+        "id": "95475ceeba730568",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "defd02f299207ef0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "a4e1a7c1d3d1ef0c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "e56f9c9199824c58",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 435.5
+  },
+  "right": {
+    "id": "c4445cb63616bca3",
+    "type": "split",
+    "children": [
+      {
+        "id": "63ce738877ebfe0a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d362e40736ecadd2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "notes/littletrick/regular/正则表达式30分钟入门教程.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "正则表达式30分钟入门教程 的反向链接列表"
+            }
+          },
+          {
+            "id": "6a2c87fd3454dc85",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "notes/prompt/权威科普提示词_含摘要_html_json.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "权威科普提示词_含摘要_html_json 的出链列表"
+            }
+          },
+          {
+            "id": "f7c6ba7e69867ecd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "d1b390404e3380a5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "notes/littletrick/powerbi/Power BI制作GDP动态排行榜详细教程.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Power BI制作GDP动态排行榜详细教程 的大纲"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "87e5d30e6fbaa4f5",
+  "lastOpenFiles": [
+    "notes/littletrick/excel/如何快速的合并多个 Excel 工作簿成为一个工作簿？.md",
+    "notes/littletrick/excel/超级简单连接mysql和excel的方法.md",
+    "notes/littletrick/powerbi/Power BI制作GDP动态排行榜详细教程.md",
+    "notes/littletrick/powerbi/Power BI Desktop获取数据(连接MySQL需要安装组件的详细步骤).md",
+    "notes/littletrick/powerbi/你的PowerBI不能发布到web，这个秘籍送给你.md",
+    "notes/littletrick/powerbi/安装msi文件出现以下报错，需用管理员权限安装msi.md",
+    "notes/littletrick/sql/README.md",
+    "notes/littletrick/sql/MySql如何删除所有多余的重复数据.md",
+    "notes/littletrick/sql/MySQL 线程状态详解.md",
+    "notes/littletrick/sql/织梦dedeCMS常用MySQL指令.md",
+    "notes/littletrick/sql/新建mysql数据库触发器.md",
+    "notes/littletrick/sql/常用sql指令大全.md",
+    "notes/prompt/README.md",
+    "notes/prompt/权威科普提示词_含摘要_html_json.md",
+    "notes/littletrick/Photoshop批量替换文字并导出图片.md",
+    "notes/littletrick/指纹浏览器ADSPOWER多号使用机场IP.md",
+    "notes/littletrick/十大创意思维课件.pdf",
+    "notes/littletrick/什么是tppabs标签？它有什么用？如何批量去除tppabs？.md",
+    "notes/littletrick/批量多开谷歌浏览器Google Chrome并相互独立.md",
+    "notes/littletrick/百度统计数据api导出流程.md",
+    "notes/littletrick/regular/README.md",
+    "notes/littletrick/regular/如何批量去除代码里的空行.md",
+    "notes/littletrick/regular/如何将多行内容合并到一行，并添加间隔符.md",
+    "notes/littletrick/python/README.md",
+    "notes/littletrick/python/Selenium安装及ChromeDriver配置.md",
+    "notes/littletrick/python/WebDriver object has no attribute find_element_by_xpaths解决办法.md",
+    "notes/littletrick/python/《Python+Cookbook》第三版中文v2.0.0.pdf",
+    "notes/littletrick/python/《Python标准库》中文版.pdf",
+    "notes/littletrick/python/《Python核心编程 第二版》.(Wesley J. Chun ).[PDF]&ckook.pdf",
+    "notes/littletrick/python/github操作流程.md",
+    "notes/littletrick/python/Python库参考手册.pdf",
+    "Pasted image 20250723170312.png",
+    "notes/prompt_backup/promptpro-backup-2025-04-28_11-09-27.json",
+    "notes/prompt_backup/promptpro-backup-2025-07-24_09-43-53.json",
+    "notes/littletrick/regular",
+    "notes/littletrick/新建文件夹",
+    "notes/littletrick/excel/新建 文本文档.txt"
+  ]
+}

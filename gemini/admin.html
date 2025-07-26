@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网址导航 - 管理后台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(156, 163, 175, 0.5); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: rgba(156, 163, 175, 0.7); }
+        html.dark ::-webkit-scrollbar-thumb { background-color: rgba(107, 114, 128, 0.5); }
+        html.dark ::-webkit-scrollbar-thumb:hover { background-color: rgba(107, 114, 128, 0.7); }
+
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': {
+                            '50': '#f0f9ff', '100': '#e0f2fe', '200': '#bae6fd', '300': '#7dd3fc', '400': '#38bdf8', '500': '#0ea5e9', '600': '#0284c7', '700': '#0369a1', '800': '#075985', '900': '#0c4a6e', '950': '#082f49'
+                        },
+                        'gray': {
+                            '50': '#f8fafc', '100': '#f1f5f9', '200': '#e2e8f0', '300': '#cbd5e1', '400': '#94a3b8', '500': '#64748b', '600': '#475569', '700': '#334155', '800': '#1e293b', '900': '#0f172a', '950': '#020617'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans antialiased">
+
+    <!-- App Container -->
+    <div id="app" class="min-h-screen flex flex-col">
+
+        <!-- Header -->
+        <header class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-gray-200/80 dark:lg:border-gray-800/80 bg-white/80 dark:bg-gray-900/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <a class="flex items-center" href="index.html">
+                        <i class="fa-solid fa-compass text-2xl text-primary-500"></i>
+                        <span class="ml-3 text-xl font-bold">网址导航</span>
+                    </a>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="text-sm font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">首页</a>
+                        <a href="list.html" class="text-sm font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">所有网站</a>
+                        <a href="admin.html" class="text-sm font-medium text-primary-500 dark:text-primary-400">管理后台</a>
+                    </nav>
+                    <div class="flex items-center">
+                        <button id="theme-toggle" type="button" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                            <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+                            <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="fade-in">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">管理后台</h1>
+                    <p class="mt-4 text-md text-gray-600 dark:text-gray-400">在这里添加、编辑或删除网站收录。</p>
+                </div>
+
+                <!-- Add/Edit Form -->
+                <section class="mt-10 bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 fade-in" style="animation-delay: 0.2s;">
+                    <h2 class="text-xl font-bold mb-6">添加新网站</h2>
+                    <form id="site-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="site-name" class="block text-sm font-medium mb-2">网站名称</label>
+                            <input type="text" id="site-name" placeholder="例如：Figma" class="w-full bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary-500 focus:outline-none transition" required>
+                        </div>
+                        <div>
+                            <label for="site-url" class="block text-sm font-medium mb-2">网站链接 (URL)</label>
+                            <input type="url" id="site-url" placeholder="https://figma.com" class="w-full bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary-500 focus:outline-none transition" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="site-desc" class="block text-sm font-medium mb-2">简短描述</label>
+                            <input type="text" id="site-desc" placeholder="领先的协作式界面设计工具。" class="w-full bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary-500 focus:outline-none transition" required>
+                        </div>
+                        <div>
+                            <label for="site-category" class="block text-sm font-medium mb-2">分类</label>
+                            <select id="site-category" class="w-full bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary-500 focus:outline-none transition">
+                                <option value="tools">常用工具</option>
+                                <option value="design">设计资源</option>
+                                <option value="dev">开发利器</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2 flex justify-end items-center">
+                            <button type="submit" class="bg-primary-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-600 transition-transform hover:scale-105">保存网站</button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Site Management List -->
+                <section class="mt-12 fade-in" style="animation-delay: 0.4s;">
+                    <h2 class="text-xl font-bold mb-6">已收录网站</h2>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-gray-50 dark:bg-gray-700/50 text-xs uppercase text-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">网站名称</th>
+                                        <th scope="col" class="px-6 py-3">分类</th>
+                                        <th scope="col" class="px-6 py-3">链接</th>
+                                        <th scope="col" class="px-6 py-3 text-right">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-site-list">
+                                    <!-- JS will populate this section -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+            <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                <div class="mb-2">
+                    <span>作者: [你的名字]</span>
+                    <span class="mx-2">|</span>
+                    <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:text-primary-500 transition-colors">
+                        <i class="fa-brands fa-twitter mr-1"></i> Twitter/X
+                    </a>
+                </div>
+                <p>&copy; <span id="copyright-year"></span> 网址导航. 保留所有权利.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Preline UI -->
+    <script src="./node_modules/preline/dist/preline.js"></script>
+    
+    <!-- Theme Toggle, Copyright & Admin Logic -->
+    <script>
+        // Theme Toggle Logic (same as index.html)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // Set Copyright Year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        // Admin Logic
+        const siteForm = document.getElementById('site-form');
+        const adminSiteList = document.getElementById('admin-site-list');
+        const categoryMap = { tools: '常用工具', design: '设计资源', dev: '开发利器' };
+
+        let sites = JSON.parse(localStorage.getItem('sites')) || [
+            { name: 'DeepL 翻译', desc: '精准的AI翻译工具，支持多种语言。', url: 'https://deepl.com', category: 'tools' },
+            { name: 'Figma', desc: '领先的协作式界面设计工具。', url: 'https://figma.com', category: 'design' },
+            { name: 'GitHub', desc: '全球最大的代码托管和协作平台。', url: 'https://github.com', category: 'dev' },
+        ];
+
+        const saveSites = () => {
+            localStorage.setItem('sites', JSON.stringify(sites));
+        }
+
+        const renderAdminList = () => {
+            adminSiteList.innerHTML = '';
+            sites.forEach((site, index) => {
+                const row = `
+                    <tr class="bg-white dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600/50">
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">${site.name}</td>
+                        <td class="px-6 py-4">${categoryMap[site.category] || '未知'}</td>
+                        <td class="px-6 py-4"><a href="${site.url}" target="_blank" class="text-primary-500 hover:underline">${site.url}</a></td>
+                        <td class="px-6 py-4 text-right">
+                            <button onclick="editSite(${index})" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">编辑</button>
+                            <button onclick="deleteSite(${index})" class="font-medium text-red-600 dark:text-red-500 hover:underline">删除</button>
+                        </td>
+                    </tr>
+                `;
+                adminSiteList.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        siteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newSite = {
+                name: document.getElementById('site-name').value,
+                url: document.getElementById('site-url').value,
+                desc: document.getElementById('site-desc').value,
+                category: document.getElementById('site-category').value,
+            };
+            sites.push(newSite);
+            saveSites();
+            renderAdminList();
+            siteForm.reset();
+            alert('网站添加成功！');
+        });
+
+        window.editSite = (index) => {
+            const site = sites[index];
+            document.getElementById('site-name').value = site.name;
+            document.getElementById('site-url').value = site.url;
+            document.getElementById('site-desc').value = site.desc;
+            document.getElementById('site-category').value = site.category;
+            // For simplicity, we'll just remove the old one. An edit would typically involve updating in place.
+            deleteSite(index, false); 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.deleteSite = (index, confirm=true) => {
+            if (confirm && !window.confirm(`确定要删除 "${sites[index].name}" 吗？`)) {
+                return;
+            }
+            sites.splice(index, 1);
+            saveSites();
+            renderAdminList();
+        }
+
+        // Initial Render
+        renderAdminList();
+
+    </script>
+
+</body>
+</html>

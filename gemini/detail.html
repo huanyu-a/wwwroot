@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网址导航 - 网站详情</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(156, 163, 175, 0.5); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: rgba(156, 163, 175, 0.7); }
+        html.dark ::-webkit-scrollbar-thumb { background-color: rgba(107, 114, 128, 0.5); }
+        html.dark ::-webkit-scrollbar-thumb:hover { background-color: rgba(107, 114, 128, 0.7); }
+
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': {
+                            '50': '#f0f9ff', '100': '#e0f2fe', '200': '#bae6fd', '300': '#7dd3fc', '400': '#38bdf8', '500': '#0ea5e9', '600': '#0284c7', '700': '#0369a1', '800': '#075985', '900': '#0c4a6e', '950': '#082f49'
+                        },
+                        'gray': {
+                            '50': '#f8fafc', '100': '#f1f5f9', '200': '#e2e8f0', '300': '#cbd5e1', '400': '#94a3b8', '500': '#64748b', '600': '#475569', '700': '#334155', '800': '#1e293b', '900': '#0f172a', '950': '#020617'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans antialiased">
+
+    <!-- App Container -->
+    <div id="app" class="min-h-screen flex flex-col">
+
+        <!-- Header -->
+        <header class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-gray-200/80 dark:lg:border-gray-800/80 bg-white/80 dark:bg-gray-900/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <a class="flex items-center" href="index.html">
+                        <i class="fa-solid fa-compass text-2xl text-primary-500"></i>
+                        <span class="ml-3 text-xl font-bold">网址导航</span>
+                    </a>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="text-sm font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">首页</a>
+                        <a href="list.html" class="text-sm font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">所有网站</a>
+                        <a href="admin.html" class="text-sm font-medium hover:text-primary-500 dark:hover:text-primary-400 transition-colors">管理后台</a>
+                    </nav>
+                    <div class="flex items-center">
+                        <button id="theme-toggle" type="button" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                            <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+                            <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-grow py-12 md:py-20">
+            <!-- Content will be loaded here by JS -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+            <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                <div class="mb-2">
+                    <span>作者: [你的名字]</span>
+                    <span class="mx-2">|</span>
+                    <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:text-primary-500 transition-colors">
+                        <i class="fa-brands fa-twitter mr-1"></i> Twitter/X
+                    </a>
+                </div>
+                <p>&copy; <span id="copyright-year"></span> 网址导航. 保留所有权利.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Preline UI -->
+    <script src="./node_modules/preline/dist/preline.js"></script>
+    
+    <!-- Theme Toggle, Copyright & Site Detail Script -->
+    <script>
+        // Theme Toggle Logic (same as index.html)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // Set Copyright Year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        // Site Data & Detail Logic
+        const sites = [
+            { name: 'DeepL 翻译', desc: '精准的AI翻译工具，支持多种语言。', url: 'https://deepl.com', category: 'tools', tags: ['翻译', 'AI', '效率'], long_desc: 'DeepL是一款由德国公司开发的顶尖机器翻译服务。它利用先进的神经网络技术，提供比传统翻译服务更自然、更准确的翻译结果。支持桌面应用和API集成。' },
+            { name: 'Figma', desc: '领先的协作式界面设计工具。', url: 'https://figma.com', category: 'design', tags: ['UI/UX', '设计', '协作'], long_desc: 'Figma是基于浏览器的界面设计协作工具，设计师和团队可以用它来创建、测试和交付更好的设计。它支持实时协作，是现代产品团队不可或缺的工具。' },
+            { name: 'GitHub', desc: '全球最大的代码托管和协作平台。', url: 'https://github.com', category: 'dev', tags: ['开发', '代码', '开源'], long_desc: 'GitHub是一个面向开源及私有软件项目的托管平台，因为只支持Git作为唯一的版本库格式进行托管，故名GitHub。它提供了强大的协作功能，如Pull Requests、Issues等。' },
+            // Add more site objects here...
+        ];
+
+        const mainContent = document.getElementById('main-content');
+
+        const renderSiteDetail = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const siteName = urlParams.get('site');
+            const site = sites.find(s => s.name === siteName);
+
+            if (!site) {
+                mainContent.innerHTML = `
+                    <div class="text-center py-20">
+                        <h1 class="text-2xl font-bold">404 - 未找到网站</h1>
+                        <p class="mt-4 text-gray-500">抱歉，我们找不到您要查找的网站。</p>
+                        <a href="list.html" class="mt-6 inline-block bg-primary-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-600 transition">返回列表</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const detailHTML = `
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+                <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+                    
+                    <!-- Left Column (Info) -->
+                    <div class="md:col-span-1">
+                        <div class="sticky top-28">
+                            <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+                                <img src="https://www.google.com/s2/favicons?domain=${site.url}&sz=64" class="w-16 h-16 rounded-xl mb-4" alt="${site.name} Icon">
+                                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">${site.name}</h1>
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">${site.desc}</p>
+                                <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center justify-center w-full bg-primary-500 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-primary-600 transition">
+                                    访问网站 <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                                </a>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <a href="list.html" class="text-sm text-gray-500 hover:text-primary-500 transition"><i class="fa-solid fa-arrow-left mr-2"></i>返回列表</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column (Details) -->
+                    <div class="md:col-span-2">
+                        <div class="prose prose-lg dark:prose-invert max-w-none">
+                            <h2 class="text-xl font-semibold border-b pb-2 border-gray-200 dark:border-gray-700">详细介绍</h2>
+                            <p>${site.long_desc}</p>
+                            
+                            <h3 class="text-lg font-semibold mt-8">标签</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${site.tags.map(tag => `<span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-primary-900 dark:text-primary-300">${tag}</span>`).join('')}
+                            </div>
+
+                            <h3 class="text-lg font-semibold mt-8">屏幕截图</h3>
+                            <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                                <img src="https://via.placeholder.com/800x600.png/e2e8f0/334155?text=Screenshot+Placeholder" alt="${site.name} Screenshot" class="rounded-md w-full">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            `;
+
+            mainContent.innerHTML = detailHTML;
+        }
+
+        // Initial Render
+        renderSiteDetail();
+
+    </script>
+
+</body>
+</html>
